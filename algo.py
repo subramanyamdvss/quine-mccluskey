@@ -34,7 +34,7 @@ def run(k,minterms=None,dontcare=None):
 			no1+=int(ch)
 		assert no1>=0
 		# if num == 0:
-		print ("in for loop printing value no1:", no1)
+		# print ("in for loop printing value no1:", no1)
 		step1[no1].append((num,()))
 		# tmp = step1[no1-1][:]
 		# print ("step no bf; ",step1[no1-1])
@@ -43,7 +43,7 @@ def run(k,minterms=None,dontcare=None):
 		# step1[no1-1] = tmp
 
 		# assert len(step1) == k
-	print ("step1",step1)
+	# print ("step1",step1)
 	for i in range(k):
 		stepn = []
 		if step1 is None :
@@ -66,7 +66,7 @@ def run(k,minterms=None,dontcare=None):
 					if (dorn.get(tp)==True) and (dorn.get(tp2)==True):
 						continue
 					if  tp[-1]==tp2[-1] :
-						print ("tp and tp2",tp,tp2)
+						# print ("tp and tp2",tp,tp2)
 						no1 = 0
 						no2 = 0
 						# print(tp2)
@@ -76,7 +76,7 @@ def run(k,minterms=None,dontcare=None):
 						st2 = '{'+st+'}'
 						st = st2.format(diff)
 						st1 = st2.format(tp[0]^tp2[0])
-						print("values ",tp[0],tp2[0],"diff ",st1)
+						# print("values ",tp[0],tp2[0],"diff ",st1)
 						# st = '{0:0%db}'%(k).format(tp[1]-tp2[1])
 						for ch in st:
 							no1+=int(ch)
@@ -94,13 +94,13 @@ def run(k,minterms=None,dontcare=None):
 
 							# print("fnlllllllll:",tmp2)
 							fnl = tuple(tmp+[tmp2])
-							print ("fnl  ",fnl)
+							# print ("fnl  ",fnl)
 
 							
 							flag = False
 							tmp = []
-							print("stepn : ",stepn)
-							print ("tmp bflop: ",tmp)
+							# print("stepn : ",stepn)
+							# print ("tmp bflop: ",tmp)
 							for fn in stepn:
 								# print("fn : ",fn)
 								# tmp+=fn
@@ -114,13 +114,13 @@ def run(k,minterms=None,dontcare=None):
 							# 	stepn[o].append(fnl)
 							# 	unpaired[tp] = False
 							
-							print ("tmp aflop: ",tmp)
+							# print ("tmp aflop: ",tmp)
 
 							
 								# print ("hello if condintional")
 							flag = 0
-							print ("fnl ",fnl[:-1])
-							print("tmp ",tmp)
+							# print ("fnl ",fnl[:-1])
+							# print("tmp ",tmp)
 							if fnl[:-1] in tmp:
 								flag = 1
 							if flag == 0:
@@ -144,59 +144,59 @@ prime_impl.sort(key = lambda tpl: -len(tpl))
 print(prime_impl)
 
 
-def extract_ess(prime_impl):
-	tmp = []
-	minterms = []
-	for fl in prime_impl:
-		tmp.append(tuple(fl[:-1]))
-		minterms += fl[:-1]
-	minterms.sort()
-	table = {}
-	ess = {}
-	for tp in tmp:
-		for i in minterms:
-			if i in tp:
-				table[(tp,i)] = 1
-			else:
-				table[(tp,i)] = 0
-	# tmp = [()]+tmp
-	track_back = {}
-	mn = remove_one(tmp,minterms,track_back)
-	print("mn : ",mn)
+# def extract_ess(prime_impl):
+# 	tmp = []
+# 	minterms = []
+# 	for fl in prime_impl:
+# 		tmp.append(tuple(fl[:-1]))
+# 		minterms += fl[:-1]
+# 	minterms.sort()
+# 	table = {}
+# 	ess = {}
+# 	for tp in tmp:
+# 		for i in minterms:
+# 			if i in tp:
+# 				table[(tp,i)] = 1
+# 			else:
+# 				table[(tp,i)] = 0
+# 	# tmp = [()]+tmp
+# 	track_back = {}
+# 	mn = remove_one(tmp,minterms,track_back)
+# 	# print("mn : ",mn)
 
-def remove_one(tpls,minterms,track_back):
-	if len(minterms) == 0:
-		min
-		return 0
-	if track_back.get(tuple(tpls)):
-		tp = track_back[tuple(tpls)]
-		mn = 999999999
-		for t in list(tp):
-			ttp = tpls[:]
-			mnt = list(set(minterms) - set(t))
-			ttp.remove(t)
-			mn = min(1+remove_one(ttp,mnt,track_back),mn)
-		return mn
-	mn = 999999999
-	for tp in tpls:
-		tmp = tpls[:]
-		mnprev = mn
-		tmp.remove(tp)
-		mnts = list(set(minterms) - set(tp))
-		mn = min(remove_one(tmp,mnts,track_back)+1,mn)
-		print ("tp : " ,tpls)
-		if mn != mnprev:
-			if track_back.get(tuple(tpls)):
-				track_back[tuple(tpls)] =  track_back.get(tuple(tpls)) |set([tp])
-			else:
-				track_back[tuple(tpls)] =  set([tp])
-		if mn == remove_one(tmp,minterms,track_back)+1:
-			if track_back.get(tuple(tpls)):
-				track_back[tuple(tpls)] = track_back.get(tuple(tpls)) |set([tp])
-			else:
-				track_back[tuple(tpls)] = set([tp])
-	return mn
-extract_ess(prime_impl)
+# def remove_one(tpls,minterms,track_back):
+# 	if len(minterms) == 0:
+# 		min
+# 		return 0
+# 	if track_back.get(tuple(tpls)):
+# 		tp = track_back[tuple(tpls)]
+# 		mn = 999999999
+# 		for t in list(tp):
+# 			ttp = tpls[:]
+# 			mnt = list(set(minterms) - set(t))
+# 			ttp.remove(t)
+# 			mn = min(1+remove_one(ttp,mnt,track_back),mn)
+# 		return mn
+# 	mn = 999999999
+# 	for tp in tpls:
+# 		tmp = tpls[:]
+# 		mnprev = mn
+# 		tmp.remove(tp)
+# 		mnts = list(set(minterms) - set(tp))
+# 		mn = min(remove_one(tmp,mnts,track_back)+1,mn)
+# 		# print ("tp : " ,tpls)
+# 		if mn != mnprev:
+# 			if track_back.get(tuple(tpls)):
+# 				track_back[tuple(tpls)] =  track_back.get(tuple(tpls)) |set([tp])
+# 			else:
+# 				track_back[tuple(tpls)] =  set([tp])
+# 		if mn == remove_one(tmp,minterms,track_back)+1:
+# 			if track_back.get(tuple(tpls)):
+# 				track_back[tuple(tpls)] = track_back.get(tuple(tpls)) |set([tp])
+# 			else:
+# 				track_back[tuple(tpls)] = set([tp])
+# 	return mn
+# # extract_ess(prime_impl)
 
 
 
